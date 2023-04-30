@@ -1,8 +1,9 @@
 import sys
-from PyQt6.QtCore import QObject, pyqtProperty, pyqtSignal, pyqtSlot
+import os
+from PyQt6.QtCore import QObject, pyqtProperty, pyqtSignal, pyqtSlot, QUrl
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtQml import QQmlApplicationEngine, qmlRegisterType
-from block import block_module, Block
+from block import block_module
 import keyboard
 
 class MyApp(QObject):
@@ -33,5 +34,7 @@ qmlRegisterType(MyApp, "MyApp", 1, 0, "MyApp")
 app = QGuiApplication(sys.argv)
 engine = QQmlApplicationEngine()
 engine.quit.connect(app.quit)
-engine.load('main.qml')
+qml_file = os.path.join(os.path.dirname(__file__), "main.qml")
+engine.load(QUrl.fromLocalFile(os.path.abspath(qml_file)))
+#engine.load('main.qml')
 sys.exit(app.exec())
