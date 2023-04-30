@@ -14,6 +14,7 @@ ApplicationWindow {
     MyApp {
         id: myApp
         onZone_change: zone_taker => titleText.text = zone_taker
+        onBlock_change: blocks => {tauntModel.remove(0, tauntModel.count); tauntModel.append(blocks)}
     }
 
     Column {
@@ -33,15 +34,44 @@ ApplicationWindow {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
             height: 200
-            model: 5
-            delegate: Row {               
+            model: tauntModel
+            interactive: false
+            spacing: 8
+            delegate: 
+            Rectangle{   
+                width: 200
+                height: 35
+                border.width: 1.5
+                color: "#191b22"
+                border.color: "red"           
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 10
-                Text { text: "Item " + (index + 1 ) 
-                color: "white"}
-                Text { text: "Value " + (index + 1) 
-                color: "white"}
-            }
+                Row {
+                    anchors.fill: parent
+                    anchors.margins: 8  
+
+                    Text {
+                        text: word
+                        color: "white"
+                        anchors.left: parent.left
+                        anchors.leftMargin: 10
+                    }
+
+                    Text{
+                        id: emptyAlligner
+                        anchors.right: parent.right
+                        anchors.rightMargin: 25
+                    }
+
+                    Text { 
+                        text: taunter
+                        color: "white"
+                        anchors.left: emptyAlligner.right
+                    }
+                }
+            }      
+        }
+        ListModel{
+            id: tauntModel
         }
 
         ComboBox {         
@@ -65,7 +95,7 @@ ApplicationWindow {
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: "<font color='white'>Apply</font>"
-            Material.background: "#666fb7"
+            Material.background: "#6c59d2"
             onClicked: {
                 myApp.on_button_clicked()
             }
