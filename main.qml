@@ -14,7 +14,7 @@ ApplicationWindow {
     MyApp {
         id: myApp
         onZone_change: zone_taker => titleText.text = zone_taker
-        onBlock_change: blocks => {tauntModel.remove(0, tauntModel.count); tauntModel.append(blocks)}
+        onBlock_change: lst => {tauntModel.remove(0, tauntModel.count); tauntModel.append(lst)}
     }
 
     Column {
@@ -43,7 +43,7 @@ ApplicationWindow {
                 height: 35
                 border.width: 1.5
                 color: "#191b22"
-                border.color: "red"           
+                border.color: me ? "red" : "transparent"
                 anchors.horizontalCenter: parent.horizontalCenter
                 Row {
                     anchors.fill: parent
@@ -97,7 +97,7 @@ ApplicationWindow {
             text: "<font color='white'>Apply</font>"
             Material.background: "#6c59d2"
             onClicked: {
-                myApp.on_button_clicked()
+                myApp.apply(lr_cb.checked, loo_cb.checked, ap_cb.checked, sc_cb.checked)
             }
         }
     }
