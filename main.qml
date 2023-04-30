@@ -8,6 +8,7 @@ ApplicationWindow {
     width: 250
     height: 350
     title: "Aqw UltraSpeaker dynamic chart"
+    flags: Qt.WindowStaysOnTopHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint
     color: "#0e1117"
     Material.accent: "#e91e63"
 
