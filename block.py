@@ -8,22 +8,15 @@ class Block:
 
     def PrepareBlock(self, lr, loo, ap, sc):
         for action in self.action_list:
+            action["me"] = False
             if(action["taunter"] == "LR" and lr == True):
                 action["me"] = True
-            else:
-                action["me"] = False
             if(action["taunter"] == "AP" and ap == True):
                 action["me"] = True
-            else:
-                action["me"] = False
             if(action["taunter"] == "SC" and sc == True):
                 action["me"] = True
-            else:
-                action["me"] = False
             if(action["taunter"] == "LOO" and loo == True):
                 action['me'] = True
-            else:
-                action["me"] = False
 
 class BlockModule:
     block_list: list
@@ -40,7 +33,7 @@ class BlockModule:
     def NextBlock(self):
         self.current_block = self.block_list[self.__index]
         self.__index += 1
-        if(self.__index == self.block_list.__len__):
+        if(self.__index == len(self.block_list)):
             self.__index = 1
 
     def __PrepareBlocks(self, lr, loo, ap, sc):

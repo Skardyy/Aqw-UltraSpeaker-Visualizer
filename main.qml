@@ -5,26 +5,29 @@ import MyApp 1.0
 
 ApplicationWindow {
     visible: true
-    width: 600
-    height: 500
-    title: "MyApp"
+    width: 250
+    height: 350
+    title: "Aqw UltraSpeaker dynamic chart"
     color: "#0e1117"
     Material.accent: "#e91e63"
 
     MyApp {
         id: myApp
-        onZone_change: zone_taker => titleText.text = zone_taker
-        onBlock_change: lst => {tauntModel.remove(0, tauntModel.count); tauntModel.append(lst)}
+        onZone_change: zone_taker => {
+            titleText.text = zone_taker;
+            titleText.color = (zone_taker == playerDropdown.currentText) ? 'red' : 'white'
+        }
+        onBlock_change: lst => {tauntModel.clear() ; tauntModel.append(lst)}
     }
 
     Column {
         anchors.fill: parent
-        spacing: 20
+        spacing: 5
 
         Text {
             id: titleText
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Title"
+            text: "None"
             color: "white"
             font.pixelSize: 24
         }
@@ -33,7 +36,7 @@ ApplicationWindow {
             id: itemList        
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            height: 200
+            height: 175
             model: tauntModel
             interactive: false
             spacing: 8
@@ -74,7 +77,10 @@ ApplicationWindow {
             id: tauntModel
         }
 
+        
         ComboBox {         
+            width: 200
+            height: 40
             anchors.horizontalCenter: parent.horizontalCenter
             id: playerDropdown
             Material.theme: Material.Dark
@@ -83,9 +89,10 @@ ApplicationWindow {
         }
 
         Row {    
+            width: 225
+            height: 40
             anchors.horizontalCenter: parent.horizontalCenter       
             Material.theme: Material.Dark
-            spacing: 10
             CheckBox { id: lr_cb; text: "LR"}
             CheckBox { id: ap_cb; text: "AP"}
             CheckBox { id: sc_cb; text: "SC" }
@@ -93,6 +100,8 @@ ApplicationWindow {
         }
 
         Button {
+            width: 200
+            height: 40
             anchors.horizontalCenter: parent.horizontalCenter
             text: "<font color='white'>Apply</font>"
             Material.background: "#6c59d2"
