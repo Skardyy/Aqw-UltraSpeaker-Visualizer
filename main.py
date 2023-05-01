@@ -4,7 +4,7 @@ from PyQt6.QtCore import QObject, pyqtProperty, pyqtSignal, pyqtSlot, QUrl
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtQml import QQmlApplicationEngine, qmlRegisterType
 from block import block_module
-import keyboard
+import mouse
 
 class MyApp(QObject):
     zone_change = pyqtSignal(str)
@@ -21,7 +21,7 @@ class MyApp(QObject):
     def apply(self, lr, loo, ap, sc):
         block_module.Init(lr, loo, ap, sc)
         if(self.started == False):
-            keyboard.add_hotkey('a', self.NextBlock)
+            mouse.on_button(buttons = mouse.X2, types= mouse.UP, callback=self.NextBlock)
             self.started = True
         self.NextBlock()
         
