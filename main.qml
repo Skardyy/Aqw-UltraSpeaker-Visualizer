@@ -5,12 +5,64 @@ import MyApp 1.0
 
 ApplicationWindow {
     visible: true
+    id: window
     width: 250
     height: 350
     title: "Aqw UltraSpeaker dynamic chart"
     flags: Qt.WindowStaysOnTopHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint
     color: "#0e1117"
     Material.accent: "#e91e63"
+
+    property int prevWidth: width
+    property int prevX: x
+    property int prevY: y
+
+    onWidthChanged: {
+        if (width > prevWidth) {
+            prevWidth = height;
+            width = 250;
+            x = prevX;
+            y = prevY;
+            resizeAnimationBig.start();
+        }
+    }
+
+    SequentialAnimation {
+        id: resizeAnimationSmall
+
+        PropertyAnimation {
+            target: window
+            property: "height"
+            to: 220
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+        PropertyAnimation {
+            target: window
+            property: "width"
+            to: 250
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+    }
+    SequentialAnimation {
+        id: resizeAnimationBig
+
+        PropertyAnimation {
+            target: window
+            property: "height"
+            to: 350
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+        PropertyAnimation {
+            target: window
+            property: "width"
+            to: 250
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+    }
 
     MyApp {
         id: myApp
@@ -107,7 +159,8 @@ ApplicationWindow {
             text: "<font color='white'>Apply</font>"
             Material.background: "#6c59d2"
             onClicked: {
-                myApp.apply(lr_cb.checked, loo_cb.checked, ap_cb.checked, sc_cb.checked)
+                myApp.apply(lr_cb.checked, loo_cb.checked, ap_cb.checked, sc_cb.checked);
+                resizeAnimationSmall.start();
             }
         }
     }

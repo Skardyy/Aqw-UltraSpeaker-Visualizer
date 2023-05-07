@@ -2,6 +2,7 @@ import sys
 import os
 from PyQt6.QtCore import QObject, pyqtProperty, pyqtSignal, pyqtSlot, QUrl
 from PyQt6.QtGui import QGuiApplication
+from PyQt6.QtQuick import QQuickWindow
 from PyQt6.QtQml import QQmlApplicationEngine, qmlRegisterType
 from block import block_module
 import mouse
@@ -9,7 +10,6 @@ import mouse
 class MyApp(QObject):
     zone_change = pyqtSignal(str)
     block_change = pyqtSignal(list)
-    started = False
 
     def update_zone(self, zone_taker):
         self.zone_change.emit(zone_taker)
@@ -36,5 +36,4 @@ engine = QQmlApplicationEngine()
 engine.quit.connect(app.quit)
 qml_file = os.path.join(os.path.dirname(__file__), "main.qml")
 engine.load(QUrl.fromLocalFile(os.path.abspath(qml_file)))
-#engine.load('main.qml')
 sys.exit(app.exec())
