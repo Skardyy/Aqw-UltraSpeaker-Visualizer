@@ -10,6 +10,7 @@ import mouse
 class MyApp(QObject):
     zone_change = pyqtSignal(str)
     block_change = pyqtSignal(list)
+    started = False
 
     def update_zone(self, zone_taker):
         self.zone_change.emit(zone_taker)
