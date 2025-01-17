@@ -1,3 +1,6 @@
+# Depercated
+use [the rust rewrite of it](https://github.com/Skardyy/Ultraspeaker-Helper)
+
 # Aqw-UltraSpeaker-Visualizer
 script to help people time their taunts / zone for ultraspeaker in aqw
 
